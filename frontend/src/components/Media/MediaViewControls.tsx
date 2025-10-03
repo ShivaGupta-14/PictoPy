@@ -3,12 +3,10 @@ import {
   Info,
   ImageIcon,
   Folder,
-  ExternalLink,
   Share2,
   Heart,
   Play,
   Pause,
-  Lock,
   X,
 } from 'lucide-react';
 
@@ -16,6 +14,7 @@ interface MediaViewControlsProps {
   showInfo: boolean;
   onToggleInfo: () => void;
   onToggleFavorite: () => void;
+  onOpenFolder: () => void;
   isFavorite: boolean;
   isSlideshowActive: boolean;
   onToggleSlideshow: () => void;
@@ -27,6 +26,7 @@ export const MediaViewControls: React.FC<MediaViewControlsProps> = ({
   showInfo,
   onToggleInfo,
   onToggleFavorite,
+  onOpenFolder,
   isFavorite,
   isSlideshowActive,
   onToggleSlideshow,
@@ -38,7 +38,7 @@ export const MediaViewControls: React.FC<MediaViewControlsProps> = ({
       <button
         onClick={onToggleInfo}
         className={`rounded-full ${
-          showInfo ? 'bg-blue-500/70' : 'bg-white/10'
+          showInfo ? 'bg-indigo-500/70' : 'bg-black/50'
         } p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg`}
         aria-label="Show Info"
       >
@@ -46,28 +46,22 @@ export const MediaViewControls: React.FC<MediaViewControlsProps> = ({
       </button>
 
       <button
-        className="rounded-full bg-white/10 p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg"
+        className="rounded-full bg-black/50 p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg"
         aria-label="Set as Wallpaper"
       >
         <ImageIcon className="h-5 w-5" />
       </button>
 
       <button
-        className="rounded-full bg-white/10 p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg"
+        onClick={onOpenFolder}
+        className="rounded-full bg-black/50 p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg"
         aria-label="Open Folder"
       >
         <Folder className="h-5 w-5" />
       </button>
 
       <button
-        className="rounded-full bg-white/10 p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg"
-        aria-label="Open With"
-      >
-        <ExternalLink className="h-5 w-5" />
-      </button>
-
-      <button
-        className="rounded-full bg-white/10 p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg"
+        className="rounded-full bg-black/50 p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg"
         aria-label="Share"
       >
         <Share2 className="h-5 w-5" />
@@ -78,18 +72,11 @@ export const MediaViewControls: React.FC<MediaViewControlsProps> = ({
         className={`rounded-full p-2.5 text-white transition-all duration-300 ${
           isFavorite
             ? 'bg-rose-500/80 hover:bg-rose-600 hover:shadow-lg'
-            : 'bg-white/10 hover:bg-white/20 hover:text-white hover:shadow-lg'
+            : 'bg-black/50 hover:bg-white/20 hover:text-white hover:shadow-lg'
         }`}
         aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
       >
         <Heart className={`h-5 w-5 ${isFavorite ? 'fill-current' : ''}`} />
-      </button>
-
-      <button
-        className="rounded-full bg-white/10 p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg"
-        aria-label="Move to Secure Folder"
-      >
-        <Lock className="h-5 w-5" />
       </button>
 
       {type === 'image' && (
@@ -111,7 +98,7 @@ export const MediaViewControls: React.FC<MediaViewControlsProps> = ({
 
       <button
         onClick={onClose}
-        className="ml-2 rounded-full bg-white/10 p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg"
+        className="ml-2 rounded-full bg-black/50 p-2.5 text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white hover:shadow-lg"
         aria-label="Close"
       >
         <X className="h-5 w-5" />
